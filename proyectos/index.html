@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+  <title>Proyectos Antes y Después | B-Edificación Arquitectos Málaga</title>
+  <meta name="description" content="Descubre nuestros proyectos de reformas integrales en Málaga con comparadores Antes/Después interactivos. Resultados reales visados por arquitecto."/>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#f9f9f6",
+            "surface": "#ffffff",
+            "surface-dim": "#dadad7",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f4f4f1",
+            "surface-container": "#eeeeeb",
+            "surface-container-high": "#e8e8e5",
+            "surface-container-highest": "#e2e3e0",
+            "on-surface": "#1a1c1a",
+            "on-surface-variant": "#444748",
+            "primary": "#1a1c1a",
+            "on-primary": "#ffffff",
+            "primary-container": "#1c1b1b",
+            "secondary": "#c85a32",
+            "secondary-dark": "#b85028",
+            "secondary-container": "#fe8357",
+            "on-secondary": "#ffffff",
+            "outline": "#747878",
+            "outline-variant": "#c4c7c7",
+            "whatsapp": "#25D366"
+          },
+          fontFamily: {
+            display: ["Outfit", "sans-serif"],
+            body: ["Manrope", "sans-serif"],
+            mono: ["Manrope", "monospace"]
+          },
+          borderRadius: {
+            "sm": "0.25rem",
+            "DEFAULT": "0.375rem",
+            "md": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "2xl": "1.25rem"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+      color: #1a1c1a;
+      background-color: #f9f9f6;
+    }
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Outfit', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Comparison Slider */
+    .ba-container {
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow: hidden;
+    }
+    .ba-slider-range {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      outline: none;
+      margin: 0;
+    }
+    .ba-slider-range::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 44px;
+      height: 44px;
+      cursor: ew-resize;
+      background: transparent;
+    }
+    .ba-slider-range::-moz-range-thumb {
+      width: 44px;
+      height: 44px;
+      cursor: ew-resize;
+      background: transparent;
+      border: none;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f4f4f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c4c7c7;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #747878;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface antialiased flex flex-col min-h-screen pb-20 md:pb-0">
+
+  <!-- 1. BARRA SUPERIOR FINA -->
+  <div class="w-full bg-surface-container-low border-b border-surface-container text-on-surface">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-10 flex items-center justify-between text-xs tracking-wide">
+      <div class="flex items-center gap-4 sm:gap-6">
+        <a class="flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors font-medium" href="tel:952123456">
+          <span class="material-symbols-outlined text-[16px] text-secondary">call</span>
+          <span>952 12 34 56</span>
+        </a>
+        <span class="text-outline-variant hidden sm:inline">|</span>
+        <a class="hidden sm:flex items-center gap-1.5 text-on-surface-variant hover:text-secondary transition-colors font-medium" href="mailto:info@reformasejemplo.es">
+          <span class="material-symbols-outlined text-[16px] text-secondary">mail</span>
+          <span>info@reformasejemplo.es</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="hidden md:inline text-on-surface-variant text-[11px] uppercase tracking-wider font-semibold">Málaga &amp; Costa del Sol</span>
+        <span class="inline-flex items-center gap-1.5 bg-secondary/10 text-secondary px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+          Respuesta en 24 h
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CABECERA FIJA -->
+  <header class="sticky top-0 z-40 w-full bg-surface/95 backdrop-blur-md border-b border-surface-container-high transition-shadow shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a class="flex items-center gap-3 group" href="/">
+        <img alt="B-Edificación Arquitectos Málaga" class="h-9 w-auto object-contain transition-transform group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1VJT3h_tPDMIdI88a4uE-c63CPCbyLm8MJDm-xD-gED8lIp649qDOUoDm6CWYZA8SBxhkaSN_Eqt-LTFXThTl1ik4oQ7fcaDWuaUpij3_NTzIQQ3xwwaWXSW1P3_Ha1kmJAczccfYKOayCqOCvxH3w1E77YtQmy8LRWA7WrPezyVZdzWIUsARW_QFBFEmB_orfxv0Hx4zbxDA6uYuGrNfN0nuHaI6_3JINa19Pd6I1Q"/>
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-lg sm:text-xl text-on-surface tracking-tight uppercase leading-none">B-Edificación</span>
+          <span class="text-[11px] font-semibold text-secondary tracking-widest uppercase mt-0.5">Arquitectos Málaga</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-7">
+        <a class="text-sm font-semibold text-on-surface-variant hover:text-secondary transition-colors" href="/servicios">Servicios</a>
+        <a class="text-sm font-semibold text-on-surface-variant hover:text-secondary transition-colors" href="/tipos-reforma">Tipos de reforma</a>
+        <a class="text-sm font-semibold text-secondary transition-colors" href="/proyectos">Proyectos</a>
+        <a class="text-sm font-semibold text-on-surface-variant hover:text-secondary transition-colors" href="/como-trabajamos">Cómo trabajamos</a>
+        <a class="text-sm font-semibold text-on-surface-variant hover:text-secondary transition-colors" href="/precios">Precios</a>
+        <a class="text-sm font-semibold text-on-surface-variant hover:text-secondary transition-colors" href="/opiniones">Opiniones</a>
+        <a class="text-sm font-semibold text-on-surface-variant hover:text-secondary transition-colors" href="/contacto">Contacto</a>
+      </nav>
+
+      <!-- Action Button & Mobile Menu Toggle -->
+      <div class="flex items-center gap-3">
+        <a class="hidden sm:inline-flex items-center justify-center bg-secondary hover:bg-secondary-dark text-white px-5 h-11 rounded-lg font-semibold text-sm shadow-sm hover:shadow transition-all duration-200" href="https://wa.me/34612345678?text=Hola,%20quiero%20presupuesto%20para%20una%20reforma" target="_blank" rel="noopener">
+          Pide presupuesto gratis
+        </a>
+        <button id="mobileMenuBtn" aria-label="Abrir menú de navegación" class="lg:hidden w-11 h-11 flex items-center justify-center rounded-lg text-on-surface hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined text-[28px]" id="mobileMenuIcon">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenuDrawer" class="hidden lg:hidden bg-surface border-b border-surface-container px-6 py-6 shadow-xl flex flex-col gap-4">
+      <nav class="flex flex-col gap-3 font-semibold text-base text-on-surface">
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link" href="/servicios">1. Servicios incluidos</a>
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link" href="/tipos-reforma">2. Tipos de reforma</a>
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link text-secondary" href="/proyectos">3. Proyectos antes / después</a>
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link" href="/como-trabajamos">4. Cómo trabajamos (5 pasos)</a>
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link" href="/precios">5. Precios y calculadora m²</a>
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link" href="/opiniones">6. Opiniones de clientes</a>
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link" href="/por-que-elegirnos">7. Por qué elegirnos</a>
+        <a class="py-2 border-b border-surface-container hover:text-secondary mobile-link" href="/faq">8. Preguntas frecuentes</a>
+        <a class="py-2 hover:text-secondary mobile-link" href="/contacto">9. Contacto directo</a>
+      </nav>
+      <div class="flex flex-col gap-2 pt-2">
+        <a class="w-full h-12 bg-secondary text-white rounded-lg flex items-center justify-center font-bold text-sm uppercase tracking-wider mobile-link" href="https://wa.me/34612345678?text=Hola,%20quiero%20presupuesto%20para%20una%20reforma" target="_blank" rel="noopener">
+          Pide presupuesto gratis
+        </a>
+        <a class="w-full h-12 bg-surface-container text-on-surface rounded-lg flex items-center justify-center gap-2 font-semibold text-sm mobile-link" href="tel:952123456">
+          <span class="material-symbols-outlined text-secondary text-[20px]">call</span>
+          Llamar al 952 12 34 56
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- CABECERA DE PROYECTOS -->
+    <section class="w-full bg-surface-container py-12 border-b border-surface-container-high">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 text-center md:text-left">
+        <span class="text-xs uppercase tracking-widest text-secondary font-bold">Casos Reales</span>
+        <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-on-surface mt-2">
+          Proyectos Realizados: Antes y Después
+        </h1>
+        <p class="text-base text-on-surface-variant mt-3 max-w-2xl leading-relaxed">
+          Desliza la barra para comprobar la transformación real de viviendas y locales ejecutados por nuestro equipo en Málaga.
+        </p>
+      </div>
+    </section>
+
+    <!-- SLIDERS COMPARATIVOS ANTES / DESPUÉS -->
+    <section id="proyectos" class="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-16 lg:py-20">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-16">
+        
+        <!-- PROYECTO 1 -->
+        <div class="bg-surface rounded-2xl overflow-hidden border border-surface-container-high shadow-md">
+          <div class="ba-container relative w-full h-[320px] sm:h-[380px]">
+            <!-- Después (Fondo) -->
+            <img class="absolute inset-0 w-full h-full object-cover" alt="Después: Reforma Salón Contemporáneo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcLVXOvqFtaSjDjVzLea7g2a3bhRcUlSvJ3Dyj1SWwhJ430JEBTEWe0iBERiokUXqOsOZzYv4zt5mG5RAaCT6fg9w4876FPXLzdwOcmVvAV08CpItmNs8HI_V7bUwkzIS_GnnNJxaWGFUBJNElMsUFqVRLqzmnBKcL8e19jgS-8XEh2UmL8HAjQJMdRf77z6n7PTpf04gPB4CF9rsWK144_0GtZgPhlnC58C49KSs"/>
+            
+            <!-- Antes (Capa Superior) -->
+            <div class="ba-before-layer absolute inset-0 w-full h-full overflow-hidden">
+              <img class="absolute inset-0 w-full h-full object-cover" alt="Antes: Estado original del inmueble" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQbl1ezRuuZ45nrkghqDk2vTyrBEYkdoxE3HmmfAs9wZ6it2X2P4oeWKRs-n9VdLzjmwKiWQkGGF3HjmIQjtmto4iJgK-TnzHjbs63nC895QdXHigS2jhPm6A9xNNrgJ9f_5Rz1E0MgSPTm24BnlVvOYI2Ws6pAjqucjmsQRMyOMie3g2T2bQxufymoXeMTrclGTD6yN3xcwCZdYmebXntJnQul82Dtxbc8VGgwWk"/>
+            </div>
+
+            <!-- Divisor Deslizante -->
+            <div class="ba-divider absolute top-0 bottom-0 w-1 bg-white shadow-lg pointer-events-none z-10 flex items-center justify-center" style="left: 50%;">
+              <div class="w-9 h-9 rounded-full bg-secondary text-white shadow-xl flex items-center justify-center -ml-[17px]">
+                <span class="material-symbols-outlined text-[20px]">unfold_more</span>
+              </div>
+            </div>
+
+            <!-- Range Input -->
+            <input type="range" min="0" max="100" value="50" class="ba-slider-range absolute inset-0 w-full h-full z-20 opacity-0 cursor-ew-resize"/>
+
+            <!-- Etiqueta Flotante -->
+            <div class="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-md">
+              Desliza para comparar
+            </div>
+          </div>
+
+          <div class="p-6">
+            <span class="text-xs uppercase tracking-wider text-secondary font-bold">La Malagueta · 145 m²</span>
+            <h3 class="font-display font-bold text-xl text-on-surface mt-1">Reforma Integral de Piso Señorío</h3>
+            <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+              Apertura total de espacios hacia el mar, aislamiento acústico de alta densidad y climatización oculta por conductos.
+            </p>
+          </div>
+        </div>
+
+        <!-- PROYECTO 2 -->
+        <div class="bg-surface rounded-2xl overflow-hidden border border-surface-container-high shadow-md">
+          <div class="ba-container relative w-full h-[320px] sm:h-[380px]">
+            <!-- Después -->
+            <img class="absolute inset-0 w-full h-full object-cover" alt="Después: Cocina Abierta con Isla" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcLVXOvqFtaSjDjVzLea7g2a3bhRcUlSvJ3Dyj1SWwhJ430JEBTEWe0iBERiokUXqOsOZzYv4zt5mG5RAaCT6fg9w4876FPXLzdwOcmVvAV08CpItmNs8HI_V7bUwkzIS_GnnNJxaWGFUBJNElMsUFqVRLqzmnBKcL8e19jgS-8XEh2UmL8HAjQJMdRf77z6n7PTpf04gPB4CF9rsWK144_0GtZgPhlnC58C49KSs"/>
+            
+            <!-- Antes -->
+            <div class="ba-before-layer absolute inset-0 w-full h-full overflow-hidden">
+              <img class="absolute inset-0 w-full h-full object-cover" alt="Antes: Cocina antigua tabicada" src="
