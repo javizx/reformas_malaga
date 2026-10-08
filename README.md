@@ -22,3 +22,4 @@ Este proyecto está optimizado para su despliegue instantáneo como sitio web es
 2. Framework Preset: **Other** / **Static Site**.
 3. Root Directory: `./`
 4. Desplegar con un solo clic.
+web de prueba
