@@ -1073,46 +1073,68 @@
 <p class="font-body-md text-body-md text-on-primary-container mb-space-xl">
             Sin compromiso alguno. Visita técnica y asesoramiento inicial gratuitos en tu vivienda o local en Málaga.
           </p>
-<form class="flex flex-col gap-space-md" onsubmit="event.preventDefault(); alert('¡Gracias por contactar con B-Edificación Arquitectos! Un arquitecto asignado revisará tu solicitud y te contactará en un plazo máximo de 24 horas.');">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="lead-name">Nombre y apellidos *</label>
-<input class="h-12 bg-surface text-on-surface placeholder:text-outline px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md" id="lead-name" placeholder="Ej. María González Gómez" required="" type="text"/>
-</div>
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="lead-phone">Teléfono móvil *</label>
-<input class="h-12 bg-surface text-on-surface placeholder:text-outline px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md" id="lead-phone" placeholder="Ej. 650 12 34 56" required="" type="tel"/>
-</div>
-</div>
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="lead-service">Tipo de proyecto o reforma *</label>
-<select class="h-12 bg-surface text-on-surface px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md cursor-pointer" id="lead-service" required="">
-<option disabled="" selected="" value="">Selecciona una opción</option>
-<option value="integral-piso">Reforma Integral de Piso / Ático</option>
-<option value="integral-chalet">Reforma Integral de Chalet / Villa</option>
-<option value="cocina-bano">Reforma Parcial (Cocina y/o Baños)</option>
-<option value="fachada-comunidad">Rehabilitación de Fachada / Edificio</option>
-<option value="local-oficina">Reforma de Local Comercial u Oficina</option>
-<option value="cambio-uso">Cambio de Uso (Local a Vivienda)</option>
-</select>
-</div>
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="lead-notes">Detalles de la vivienda (Ubicación, m², estado actual...)</label>
-<textarea class="bg-surface text-on-surface placeholder:text-outline p-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md resize-none" id="lead-notes" placeholder="Ej. Piso de 90 m² en La Malagueta, queremos abrir la cocina al salón y renovar dos baños..." rows="3"></textarea>
-</div>
-<!-- Checkbox Privacy -->
-<label class="flex items-start gap-3 cursor-pointer select-none pt-space-xs">
-<input class="mt-1 w-4 h-4 rounded text-secondary focus:ring-secondary accent-secondary" required="" type="checkbox"/>
-<span class="font-body-sm text-body-sm text-on-primary-container leading-tight">
-                Acepto la política de privacidad y autorizo a B-Edificación Arquitectos a contactarme para valorar mi proyecto de reforma.
-              </span>
-</label>
-<!-- Submit Button -->
-<button class="h-14 mt-space-sm bg-secondary hover:bg-secondary-container text-on-secondary hover:text-on-secondary-container font-label-lg text-label-lg rounded-lg shadow-lg transition-all duration-200 flex items-center justify-center gap-2 font-bold uppercase tracking-wider" type="submit">
-<span>Quiero mi presupuesto gratis</span>
-<span class="material-symbols-outlined text-[20px]">send</span>
-</button>
+<form id="leadForm" action="https://formspree.io/f/xvkzaqlg" method="POST" class="flex flex-col gap-space-md" onsubmit="handleDesktopFormSubmit(event)">
+  <input type="text" name="_gotcha" style="display:none !important;" tabindex="-1" autocomplete="off" />
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+    <div class="flex flex-col gap-1.5">
+      <label class="font-label-lg text-label-lg text-on-primary" for="lead-name">Nombre y apellidos *</label>
+      <input id="lead-name" name="nombre" class="h-12 bg-surface text-on-surface placeholder:text-outline px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md" placeholder="Ej. María González Gómez" required type="text"/>
+    </div>
+    <div class="flex flex-col gap-1.5">
+      <label class="font-label-lg text-label-lg text-on-primary" for="lead-phone">Teléfono móvil *</label>
+      <input id="lead-phone" name="telefono" class="h-12 bg-surface text-on-surface placeholder:text-outline px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md" placeholder="Ej. 650 12 34 56" required type="tel"/>
+    </div>
+  </div>
+  <div class="flex flex-col gap-1.5">
+    <label class="font-label-lg text-label-lg text-on-primary" for="lead-email">Correo electrónico</label>
+    <input id="lead-email" name="email" class="h-12 bg-surface text-on-surface placeholder:text-outline px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md" placeholder="Ej. maria@ejemplo.com" type="email"/>
+  </div>
+  <div class="flex flex-col gap-1.5">
+    <label class="font-label-lg text-label-lg text-on-primary" for="lead-notes">Mensaje</label>
+    <textarea id="lead-notes" name="mensaje" class="bg-surface text-on-surface placeholder:text-outline p-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-body-md font-body-md resize-none" placeholder="Cuéntanos los detalles de tu vivienda o reforma..." rows="3"></textarea>
+  </div>
+  <label class="flex items-start gap-3 cursor-pointer select-none pt-space-xs">
+    <input id="lead-privacy" class="mt-1 w-4 h-4 rounded text-secondary focus:ring-secondary accent-secondary" required type="checkbox"/>
+    <span class="font-body-sm text-body-sm text-on-primary-container leading-tight">
+      Acepto la política de privacidad y autorizo a B-Edificación Arquitectos a contactarme para valorar mi proyecto de reforma.
+    </span>
+  </label>
+  <div id="desktopFormStatus" class="hidden p-4 rounded-lg text-sm font-bold text-center transition-all"></div>
+  <button id="desktopSubmitBtn" class="h-14 mt-space-sm bg-secondary hover:bg-secondary-container text-on-secondary hover:text-on-secondary-container font-label-lg text-label-lg rounded-lg shadow-lg transition-all duration-200 flex items-center justify-center gap-2 font-bold uppercase tracking-wider disabled:opacity-70 disabled:cursor-not-allowed" type="submit">
+    <span>Quiero mi presupuesto gratis</span>
+    <span class="material-symbols-outlined text-[20px]">send</span>
+  </button>
 </form>
+<script>
+async function handleDesktopFormSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('leadForm');
+  const btn = document.getElementById('desktopSubmitBtn');
+  const status = document.getElementById('desktopFormStatus');
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+  btn.disabled = true;
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<span>Enviando...</span><span class="material-symbols-outlined text-[20px] animate-spin">sync</span>';
+  status.classList.add('hidden');
+  try {
+    const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) {
+      status.innerHTML = '<div class="flex items-center justify-center gap-2 text-green-300"><span class="material-symbols-outlined text-[22px]">check_circle</span> <span>¡Gracias! Te contactaremos pronto</span></div>';
+      status.className = "p-4 rounded-lg text-sm font-bold text-center bg-green-900/60 border border-green-500/70 block shadow-md";
+      form.reset();
+    } else {
+      status.innerHTML = '<div class="flex items-center justify-center gap-2 text-red-200"><span class="material-symbols-outlined text-[22px]">error</span> <span>Algo salió mal, inténtalo de nuevo o escríbenos por WhatsApp</span></div>';
+      status.className = "p-4 rounded-lg text-sm font-bold text-center bg-red-900/60 border border-red-500/70 block shadow-md";
+    }
+  } catch(err) {
+    status.innerHTML = '<div class="flex items-center justify-center gap-2 text-red-200"><span class="material-symbols-outlined text-[22px]">error</span> <span>Algo salió mal, inténtalo de nuevo o escríbenos por WhatsApp</span></div>';
+    status.className = "p-4 rounded-lg text-sm font-bold text-center bg-red-900/60 border border-red-500/70 block shadow-md";
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+</script>
 </div>
 <!-- Right Column: Direct Contact & Office Info -->
 <div class="lg:col-span-5 flex flex-col justify-between space-y-space-xl lg:pl-space-lg">

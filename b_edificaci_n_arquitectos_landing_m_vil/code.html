@@ -773,47 +773,65 @@
       </p>
 </div>
 <!-- Formulario de Conversión Táctil -->
-<form class="flex flex-col gap-4" onsubmit="event.preventDefault(); document.getElementById('form-feedback').classList.remove('hidden'); this.reset();">
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="form-name">Nombre y apellidos *</label>
-<input class="w-full min-h-[48px] px-4 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary" id="form-name" placeholder="Ej. Carlos Martínez" required="" type="text"/>
-</div>
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="form-phone">Teléfono de contacto *</label>
-<input class="w-full min-h-[48px] px-4 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary" id="form-phone" placeholder="Ej. 650 00 00 00" required="" type="tel"/>
-</div>
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="form-type">Tipo de reforma *</label>
-<div class="relative">
-<select class="w-full min-h-[48px] px-4 pr-10 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary appearance-none" id="form-type">
-<option value="integral">Piso / Vivienda integral</option>
-<option value="cocina-bano">Cocina y/o Baño</option>
-<option value="fachada-cubierta">Fachada / Cubierta comunitaria</option>
-<option value="local-oficina">Local comercial u oficina</option>
-<option value="cambio-uso">Cambio de uso a vivienda</option>
-<option value="otro">Otro proyecto técnico</option>
-</select>
-<span class="material-symbols-outlined text-[20px] text-on-surface pointer-events-none absolute right-3 top-3.5">expand_more</span>
-</div>
-</div>
-<div class="flex flex-col gap-1.5">
-<label class="font-label-lg text-label-lg text-on-primary" for="form-msg">Detalles de la reforma (opcional)</label>
-<textarea class="w-full p-4 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary" id="form-msg" placeholder="Metros aprox, ubicación en Málaga, plazos estimados..." rows="3"></textarea>
-</div>
-<div class="flex items-start gap-2.5 pt-1">
-<input class="mt-1 w-4 h-4 rounded text-secondary focus:ring-secondary" id="form-privacy" required="" type="checkbox"/>
-<label class="font-body-sm text-body-sm text-outline-variant" for="form-privacy">
-          He leído y acepto la <a class="underline hover:text-on-primary" href="#">política de privacidad</a> para el tratamiento de mis datos de contacto.
-        </label>
-</div>
-<button class="min-h-[48px] w-full px-space-lg rounded-lg bg-secondary text-on-secondary flex items-center justify-center font-label-lg text-label-lg shadow-sm hover:bg-secondary-container transition-colors active:opacity-90" type="submit">
-        Quiero mi presupuesto gratis
-      </button>
-<!-- Feedback de éxito simulado -->
-<div class="hidden p-3 rounded-lg bg-surface-container text-on-surface text-center font-body-sm text-body-sm" id="form-feedback">
-        Solicitud enviada con éxito. Un arquitecto te llamará en menos de 24 horas.
-      </div>
+<form id="mobileLeadForm" action="https://formspree.io/f/xvkzaqlg" method="POST" class="flex flex-col gap-4" onsubmit="handleMobileFormSubmit(event)">
+  <input type="text" name="_gotcha" style="display:none !important;" tabindex="-1" autocomplete="off" />
+  <div class="flex flex-col gap-1.5">
+    <label class="font-label-lg text-label-lg text-on-primary" for="form-name">Nombre y apellidos *</label>
+    <input class="w-full min-h-[48px] px-4 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary" id="form-name" name="nombre" placeholder="Ej. Carlos Martínez" required type="text"/>
+  </div>
+  <div class="flex flex-col gap-1.5">
+    <label class="font-label-lg text-label-lg text-on-primary" for="form-phone">Teléfono de contacto *</label>
+    <input class="w-full min-h-[48px] px-4 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary" id="form-phone" name="telefono" placeholder="Ej. 650 00 00 00" required type="tel"/>
+  </div>
+  <div class="flex flex-col gap-1.5">
+    <label class="font-label-lg text-label-lg text-on-primary" for="form-email">Correo electrónico</label>
+    <input class="w-full min-h-[48px] px-4 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary" id="form-email" name="email" placeholder="Ej. carlos@ejemplo.com" type="email"/>
+  </div>
+  <div class="flex flex-col gap-1.5">
+    <label class="font-label-lg text-label-lg text-on-primary" for="form-msg">Mensaje</label>
+    <textarea class="w-full p-4 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-secondary" id="form-msg" name="mensaje" placeholder="Metros aprox, ubicación en Málaga, plazos estimados..." rows="3"></textarea>
+  </div>
+  <div class="flex items-start gap-2.5 pt-1">
+    <input class="mt-1 w-4 h-4 rounded text-secondary focus:ring-secondary" id="form-privacy" required type="checkbox"/>
+    <label class="font-body-sm text-body-sm text-outline-variant" for="form-privacy">
+      He leído y acepto la <a class="underline hover:text-on-primary" href="#">política de privacidad</a> para el tratamiento de mis datos de contacto.
+    </label>
+  </div>
+  <div id="mobileFormStatus" class="hidden p-3 rounded-lg text-sm font-bold text-center transition-all"></div>
+  <button id="mobileSubmitBtn" class="min-h-[48px] w-full px-space-lg rounded-lg bg-secondary text-on-secondary flex items-center justify-center font-label-lg text-label-lg shadow-sm hover:bg-secondary-container transition-colors active:opacity-90 disabled:opacity-70 disabled:cursor-not-allowed" type="submit">
+    Quiero mi presupuesto gratis
+  </button>
 </form>
+<script>
+async function handleMobileFormSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('mobileLeadForm');
+  const btn = document.getElementById('mobileSubmitBtn');
+  const status = document.getElementById('mobileFormStatus');
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+  btn.disabled = true;
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '<span>Enviando...</span><span class="material-symbols-outlined text-[20px] animate-spin">sync</span>';
+  status.classList.add('hidden');
+  try {
+    const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { 'Accept': 'application/json' } });
+    if (res.ok) {
+      status.innerHTML = '<div class="flex items-center justify-center gap-2 text-green-300"><span class="material-symbols-outlined text-[20px]">check_circle</span> <span>¡Gracias! Te contactaremos pronto</span></div>';
+      status.className = "p-3 rounded-lg text-sm font-bold text-center bg-green-900/60 border border-green-500/70 block shadow-md";
+      form.reset();
+    } else {
+      status.innerHTML = '<div class="flex items-center justify-center gap-2 text-red-200"><span class="material-symbols-outlined text-[20px]">error</span> <span>Algo salió mal, inténtalo de nuevo o escríbenos por WhatsApp</span></div>';
+      status.className = "p-3 rounded-lg text-sm font-bold text-center bg-red-900/60 border border-red-500/70 block shadow-md";
+    }
+  } catch(err) {
+    status.innerHTML = '<div class="flex items-center justify-center gap-2 text-red-200"><span class="material-symbols-outlined text-[20px]">error</span> <span>Algo salió mal, inténtalo de nuevo o escríbenos por WhatsApp</span></div>';
+    status.className = "p-3 rounded-lg text-sm font-bold text-center bg-red-900/60 border border-red-500/70 block shadow-md";
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+</script>
 <!-- Información de Contacto Directa y Estudio Físico -->
 <div class="flex flex-col gap-3 pt-space-md">
 <div class="flex items-center gap-3">

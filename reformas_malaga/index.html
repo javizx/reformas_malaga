@@ -1513,40 +1513,34 @@
               Sin compromiso. Visita y asesoramiento inicial gratuitos en tu vivienda o local en Málaga y Costa del Sol.
             </p>
 
-            <!-- FORMULARIO CORTO DE 4 CAMPOS -->
-            <form id="leadForm" class="flex flex-col gap-5" onsubmit="handleFormSubmit(event)">
+                        <!-- FORMULARIO CORTO DE 4 CAMPOS CONECTADO A FORMSPREE -->
+            <form id="leadForm" action="https://formspree.io/f/xvkzaqlg" method="POST" class="flex flex-col gap-5" onsubmit="handleFormSubmit(event)">
+              <!-- Campo oculto anti-spam (honeypot) -->
+              <input type="text" name="_gotcha" style="display:none !important;" tabindex="-1" autocomplete="off" />
+
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- Campo 1: Nombre -->
+                <!-- Campo 1: Nombre (obligatorio) -->
                 <div class="flex flex-col gap-1.5">
                   <label class="text-xs font-bold text-white uppercase tracking-wider" for="lead-name">Nombre y apellidos *</label>
-                  <input id="lead-name" class="h-12 bg-white text-on-surface placeholder:text-gray-400 px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium" placeholder="Ej. Juan Gómez" required type="text"/>
+                  <input id="lead-name" name="nombre" class="h-12 bg-white text-on-surface placeholder:text-gray-400 px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium" placeholder="Ej. Juan Gómez" required type="text"/>
                 </div>
-                <!-- Campo 2: Teléfono -->
+                <!-- Campo 2: Teléfono (obligatorio) -->
                 <div class="flex flex-col gap-1.5">
                   <label class="text-xs font-bold text-white uppercase tracking-wider" for="lead-phone">Teléfono móvil *</label>
-                  <input id="lead-phone" class="h-12 bg-white text-on-surface placeholder:text-gray-400 px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium" placeholder="Ej. 650 12 34 56" required type="tel"/>
+                  <input id="lead-phone" name="telefono" class="h-12 bg-white text-on-surface placeholder:text-gray-400 px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium" placeholder="Ej. 650 12 34 56" required type="tel"/>
                 </div>
               </div>
 
-              <!-- Campo 3: Tipo de Reforma (desplegable) -->
+              <!-- Campo 3: Email (name="email") -->
               <div class="flex flex-col gap-1.5">
-                <label class="text-xs font-bold text-white uppercase tracking-wider" for="lead-service">Tipo de reforma *</label>
-                <select id="lead-service" class="h-12 bg-white text-on-surface px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium cursor-pointer" required>
-                  <option value="" disabled selected>Selecciona una opción</option>
-                  <option value="integral-vivienda">Reforma integral de vivienda (piso / ático / chalet)</option>
-                  <option value="reforma-parcial">Reforma parcial (cocina y/o baños)</option>
-                  <option value="rehabilitacion-fachadas">Rehabilitación de fachadas / SATE</option>
-                  <option value="cubiertas-comunidad">Rehabilitación de cubiertas o comunidades</option>
-                  <option value="naves-locales">Reforma de naves industriales o local comercial</option>
-                  <option value="cambio-uso">Cambio de uso de local a vivienda</option>
-                  <option value="otro">Otro proyecto de arquitectura</option>
-                </select>
+                <label class="text-xs font-bold text-white uppercase tracking-wider" for="lead-email">Correo electrónico</label>
+                <input id="lead-email" name="email" class="h-12 bg-white text-on-surface placeholder:text-gray-400 px-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium" placeholder="Ej. juan@ejemplo.com" type="email"/>
               </div>
 
-              <!-- Campo 4: Mensaje opcional -->
+              <!-- Campo 4: Mensaje (name="mensaje") -->
               <div class="flex flex-col gap-1.5">
-                <label class="text-xs font-bold text-white uppercase tracking-wider" for="lead-notes">Mensaje opcional (Ubicación, m², estado actual...)</label>
-                <textarea id="lead-notes" class="bg-white text-on-surface placeholder:text-gray-400 p-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium resize-none" placeholder="Ej. Piso de 95 m² en La Malagueta, queremos reformarlo íntegramente..." rows="3"></textarea>
+                <label class="text-xs font-bold text-white uppercase tracking-wider" for="lead-notes">Mensaje</label>
+                <textarea id="lead-notes" name="mensaje" class="bg-white text-on-surface placeholder:text-gray-400 p-4 rounded-lg outline-none focus:ring-2 focus:ring-secondary text-sm font-medium resize-none" placeholder="Cuéntanos los detalles de tu vivienda o reforma (ubicación, m², tipo de obra...)" rows="3"></textarea>
               </div>
 
               <!-- Casilla de Privacidad -->
@@ -1557,8 +1551,11 @@
                 </span>
               </label>
 
+              <!-- Mensaje de estado / feedback en el mismo sitio -->
+              <div id="formStatusMessage" class="hidden p-4 rounded-lg text-sm font-bold text-center transition-all"></div>
+
               <!-- Botón Grande -->
-              <button class="h-14 mt-2 bg-secondary hover:bg-secondary-dark text-white font-bold text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 uppercase tracking-wider" type="submit">
+              <button id="leadSubmitBtn" class="h-14 mt-2 bg-secondary hover:bg-secondary-dark disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 uppercase tracking-wider" type="submit">
                 <span>Quiero mi presupuesto gratis</span>
                 <span class="material-symbols-outlined text-[20px]">send</span>
               </button>
@@ -1920,17 +1917,51 @@
       }
     }
 
-    // 4. FORM SUBMISSION
-    function handleFormSubmit(e) {
+        // 4. FORM SUBMISSION VIA FETCH TO FORMSPREE
+    async function handleFormSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('leadForm');
+      const submitBtn = document.getElementById('leadSubmitBtn');
+      const statusMsg = document.getElementById('formStatusMessage');
+
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
-      document.getElementById('confirmModal').classList.remove('hidden');
-      window.open('https://wa.me/3412345678?text=Hola,%20quiero%20presupuesto%20para%20una%20reforma', '_blank');
-      form.reset();
+
+      // Estado Enviando...
+      submitBtn.disabled = true;
+      const originalBtnContent = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span>Enviando...</span><span class="material-symbols-outlined text-[20px] animate-spin">sync</span>';
+
+      // Ocultar mensajes previos
+      statusMsg.classList.add('hidden');
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          statusMsg.innerHTML = '<div class="flex items-center justify-center gap-2 text-green-300"><span class="material-symbols-outlined text-[22px]">check_circle</span> <span>¡Gracias! Te contactaremos pronto</span></div>';
+          statusMsg.className = "p-4 rounded-lg text-sm font-bold text-center bg-green-900/60 border border-green-500/70 block shadow-md";
+          form.reset();
+        } else {
+          statusMsg.innerHTML = '<div class="flex items-center justify-center gap-2 text-red-200"><span class="material-symbols-outlined text-[22px]">error</span> <span>Algo salió mal, inténtalo de nuevo o escríbenos por <a href="https://wa.me/3412345678?text=Hola,%20quiero%20presupuesto%20para%20una%20reforma" target="_blank" rel="noopener" class="underline text-whatsapp font-bold hover:text-white">WhatsApp</a></span></div>';
+          statusMsg.className = "p-4 rounded-lg text-sm font-bold text-center bg-red-900/60 border border-red-500/70 block shadow-md";
+        }
+      } catch (err) {
+        statusMsg.innerHTML = '<div class="flex items-center justify-center gap-2 text-red-200"><span class="material-symbols-outlined text-[22px]">error</span> <span>Algo salió mal, inténtalo de nuevo o escríbenos por <a href="https://wa.me/3412345678?text=Hola,%20quiero%20presupuesto%20para%20una%20reforma" target="_blank" rel="noopener" class="underline text-whatsapp font-bold hover:text-white">WhatsApp</a></span></div>';
+        statusMsg.className = "p-4 rounded-lg text-sm font-bold text-center bg-red-900/60 border border-red-500/70 block shadow-md";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnContent;
+      }
     }
 
     function closeConfirmModal() {
